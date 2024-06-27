@@ -23,10 +23,11 @@ const LoginForm: FC = () => {
 
   const onSubmit = (data: LoginFormData) => {
     setLoading(true);
+    localStorage.setItem("userData", JSON.stringify(data));
 
     setTimeout(() => {
       reset();
-      navigate("/dashboard");
+      navigate("/dashboard/*");
       setLoading(false);
     }, 2000);
   };
