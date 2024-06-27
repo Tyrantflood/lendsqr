@@ -2,11 +2,14 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-interface Props {}
+interface LoginFormData {
+  email: string;
+  password: string;
+}
 
-const LoginForm: FC<Props> = () => {
-  const [showPassword, setShowPassword] = useState<Boolean>(false);
-  const [loading, setLoading] = useState<Boolean>(false);
+const LoginForm: FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -14,24 +17,22 @@ const LoginForm: FC<Props> = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<LoginFormData>({
     mode: "all",
   });
 
-  const onSubmit = (data: any) => {
-    if (data) {
-      setLoading(true);
+  const onSubmit = (data: LoginFormData) => {
+    setLoading(true);
 
-      setTimeout(() => {
-        reset();
-        navigate("/dashboard");
-        setLoading(false);
-      }, 2000);
-    }
+    setTimeout(() => {
+      reset();
+      navigate("/dashboard");
+      setLoading(false);
+    }, 2000);
   };
 
   return (
-    <section className="">
+    <section className="login-section">
       <div className="login-header">
         <h1>Welcome!</h1>
         <p>Enter details to login.</p>
@@ -43,12 +44,12 @@ const LoginForm: FC<Props> = () => {
             type="email"
             placeholder="Email"
             {...register("email", {
-              required: true,
+              required: "Please enter your email",
             })}
           />
-          {errors.email && errors.email.type === "required" && (
+          {errors.email && (
             <span role="alert" className="input-error">
-              Please enter your email
+              {errors.email.message}
             </span>
           )}
         </div>
@@ -59,7 +60,7 @@ const LoginForm: FC<Props> = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               {...register("password", {
-                required: true,
+                required: "Please enter your password",
               })}
             />
             <p
@@ -69,17 +70,18 @@ const LoginForm: FC<Props> = () => {
               {showPassword ? "HIDE" : "SHOW"}
             </p>
           </div>
-
-          {errors.password && errors.password.type === "required" && (
+          {errors.password && (
             <span role="alert" className="input-error">
-              Please enter your password
+              {errors.password.message}
             </span>
           )}
         </div>
 
         <p>FORGOT PASSWORD?</p>
 
-        <button type="submit">{loading ? "Loading..." : "LOG IN"}</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "LOG IN"}
+        </button>
       </form>
     </section>
   );

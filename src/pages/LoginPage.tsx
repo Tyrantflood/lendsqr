@@ -1,20 +1,24 @@
-import "../styles/login.scss";
 import LoginForm from "../components/Login/LoginForm";
+import "../styles/login.scss";
 
 const Login = () => {
   return (
-    <div className="login">
-      <div className="login-logo">
-        <img src="/images/logo.svg" alt="logo" className="logo" />
-        <div>
-          <img src="/images/login-illus.svg" alt="illustration" />
-        </div>
+    <section className="login">
+      <div className="login-div">
+        <section className="login-images">
+          <img src="/images/logo.svg" alt="logo" className="logo" />
+          <div>
+            <img src="/images/login-illus.svg" alt="illustration" />
+          </div>
+        </section>
+
+        <section className="login-form">
+          <img src="/images/logo.svg" alt="logo" className="logo" />
+
+          <LoginForm />
+        </section>
       </div>
-      <div className="login-form">
-        <img src="/images/logo.svg" alt="logo" className="logo" />
-        <LoginForm />
-      </div>
-    </div>
+    </section>
   );
 };
 
