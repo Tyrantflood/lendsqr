@@ -1,7 +1,8 @@
+import { FC } from "react";
 import LoginForm from "../components/Login/LoginForm";
 import "../styles/login.scss";
 
-const Login = () => {
+const Login: FC = () => {
   return (
     <section className="login">
       <div className="login-div">
@@ -14,7 +15,6 @@ const Login = () => {
 
         <section className="login-form">
           <img src="/images/logo.svg" alt="logo" className="logo" />
-
           <LoginForm />
         </section>
       </div>

@@ -1,4 +1,3 @@
-import react from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/LoginPage";
 // import DashboardLayout from "./layout/DashboardLayout";
